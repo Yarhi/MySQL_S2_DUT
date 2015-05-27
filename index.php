@@ -13,6 +13,11 @@
   }
 */
 /* à appeller avant chaque utilisation de la base de donnée*/
+/*
+** http://php.net/manual/fr/function.htmlspecialchars.php
+** http://www.bases-hacking.org/sql-injection.html
+** http://fr.wikipedia.org/wiki/Injection_SQL
+*/
 
 	include('data/connexion_bdd.php');
 	
@@ -22,7 +27,6 @@
   }else{
     $table = $_GET['table'];
   }
-
 
   //données colonnes
   $req_table_check = $pdo->query("SELECT * FROM ".$table.";");
@@ -172,12 +176,17 @@
         color: rgb(0, 153, 255);
         cursor: pointer;        
       }
+
+      #dropdown{
+        width:100%;
+        border:solid 1px grey;
+      }
 		</style>
 	</head>
 	<body>
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <nav class="navbar navbar-default">
+     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -314,6 +323,7 @@
       </div>
     </div>
 
+    <div id="table" style="display:none"><?=$table?></div>
     <div style="display:none" id="nb_col">
       <div id="nb_col_ADHERENT"><?=$nb_col_adherent?></div>
       <div id="nb_col_EMPRUNT"><?=$nb_col_emprunt?></div>
@@ -395,7 +405,7 @@
               ?>
                 <div class="form-group">
                   <label for="recipient-name" class="control-label"><?=$name_col['name']?></label>
-                  <input type="text" name="li<?=$i?>" class="form-control" id="recipient-name<?=$i?>">
+                  <input type="text" <?php if($i==0) echo "readonly='true'";?> name="li<?=$i?>" class="form-control" id="recipient-name<?=$i?>">
                 </div>
               <?php
                 }

@@ -1,6 +1,8 @@
-var nb_col = document.getElementById("nb_col").innerHTML;
+var tab = document.getElementById("table").innerHTML;
+var nb_col = document.getElementById("nb_col_"+tab).innerHTML;
 var add=0;
 var fixed=false;
+
 
 function navbar_fixed(){
   if (this.fixed==false) {
@@ -18,10 +20,9 @@ function navbar_fixed(){
 
 function edit(id){
   document.getElementById("ModalLabel_title").innerHTML = "Edition ligne "+id;
-
   for (var i = 0; i < nb_col; i++) {
     var cible = document.getElementById("recipient-name"+i);
-    var value_input = document.getElementById("li"+id+i);
+    var value_input = document.getElementById("li"+id+i); 
     cible.value = value_input.innerHTML;
   };
 };
@@ -56,14 +57,95 @@ function add_val(table){
       $("#modal_body_add").append("<input type='text' name='li_add"+i+"' readonly='true' class='form-control' value='"+(nb_li+1)+"'/>");
     }
     else{
-      $("#modal_body_add").append("<input type='text' name='li_add"+i+"' class='form-control' />");
+      if (table=="EMPRUNT") {
+        if(i==2 || i==3){
+          dropdown_emprunt();
+          i=3;
+        }
+        else{
+          $("#modal_body_add").append("<input type='text' name='li_add"+i+"' class='form-control' />");
+        }
+      }
+      else if(table=="OEUVRE"){
+        if(i==2){ 
+          dropdown_oeuvre();
+          i=2;
+        } 
+        else{
+          $("#modal_body_add").append("<input type='text' name='li_add"+i+"' class='form-control' />");
+        }
+      }
+      else if(table=="EXEMPLAIRE"){
+        if(i==5){ 
+          dropdown_exemplaire();
+          i=5;
+        } 
+        else{
+          $("#modal_body_add").append("<input type='text' name='li_add"+i+"' class='form-control' />");
+        }
+      }
+      else{
+          $("#modal_body_add").append("<input type='text' name='li_add"+i+"' class='form-control' />");       
+      }
     }
   }
   this.add=1;
 }
 
+function dropdown_emprunt(){
+  $("#modal_body_add").append("<div id='dropdown_emprunt'></div>");
+  if (window.XMLHttpRequest) {
+      // code for IE7+, Firefox, Chrome, Opera, Safari
+      xmlhttp = new XMLHttpRequest();
+  } else {
+      // code for IE6, IE5
+      xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+          document.getElementById("dropdown_emprunt").innerHTML = xmlhttp.responseText;
+      }
+  }
+  xmlhttp.open("GET","http://localhost:8080/bdd_projet/1/data/dropdown_add/drop_emprunt.php");
+  xmlhttp.send();
+}
+
+function dropdown_oeuvre(){
+  $("#modal_body_add").append("<div id='dropdown_oeuvre'></div>");
+  if (window.XMLHttpRequest) {
+      // code for IE7+, Firefox, Chrome, Opera, Safari
+      xmlhttp = new XMLHttpRequest();
+  } else {
+      // code for IE6, IE5
+      xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+          document.getElementById("dropdown_oeuvre").innerHTML = xmlhttp.responseText;
+      }
+  }
+  xmlhttp.open("GET","http://localhost:8080/bdd_projet/1/data/dropdown_add/drop_oeuvre.php");
+  xmlhttp.send();
+}
 
 
+function dropdown_exemplaire(){
+  $("#modal_body_add").append("<div id='dropdown_exemplaire'></div>");
+  if (window.XMLHttpRequest) {
+      // code for IE7+, Firefox, Chrome, Opera, Safari
+      xmlhttp = new XMLHttpRequest();
+  } else {
+      // code for IE6, IE5
+      xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+          document.getElementById("dropdown_exemplaire").innerHTML = xmlhttp.responseText;
+      }
+  }
+  xmlhttp.open("GET","http://localhost:8080/bdd_projet/1/data/dropdown_add/drop_exemplaire.php");
+  xmlhttp.send();
+}
 
 
 function information(id){
@@ -86,7 +168,7 @@ function showInfo(id) {
                 document.getElementById("nb_emprunt_info").innerHTML = xmlhttp.responseText;
             }
         }
-        xmlhttp.open("GET","http://localhost:8080/bdd_projet/1/data/getInfo.php?id="+id+"&table=<?=$table?>");
+        xmlhttp.open("GET","http://localhost:8080/bdd_projet/1/data/getInfo.php?id="+id+"&table="+tab);
         xmlhttp.send();
     }
 }

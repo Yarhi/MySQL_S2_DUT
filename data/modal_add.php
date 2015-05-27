@@ -6,6 +6,7 @@
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               <h4 class="modal-title" id="ModalLabel_title_add">Ajout de données</h4>
+              <input type="hidden" name="">
             </div>
             <div id="modal_body_bef">
               <input type="hidden" name="table" id="table_add" value=""/>

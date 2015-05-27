@@ -5,8 +5,6 @@
 <div class="modal-body">
 <?php
     include('connexion_bdd.php');
-
-
     //POUR TABLE ADHERENT
     if($_GET['table']=="ADHERENT"){
     	$req_info_str = "SELECT count(EMPRUNT.idAdherent) as nb_emprunt,ADHERENT.nomAdherent FROM EMPRUNT,ADHERENT WHERE ADHERENT.idAdherent=EMPRUNT.idAdherent AND ADHERENT.idAdherent=".$_GET['id']." GROUP BY EMPRUNT.idAdherent;";
