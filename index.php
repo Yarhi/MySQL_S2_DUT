@@ -12,7 +12,7 @@
     }
   }
 */
-/* à appeller avant chaque utilisation de la base de donnée*/
+/* à appeller avant chaque utilisation de la base de donnée */
 /*
 ** http://php.net/manual/fr/function.htmlspecialchars.php
 ** http://www.bases-hacking.org/sql-injection.html
@@ -213,7 +213,26 @@
           </ul>
         </div>
       </div>
-    </nav>		
+    </nav>
+    <?php
+  if (isset($_GET["erreur"])) {?>
+    <div class="alert alert-danger alert-dismissible fade in" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+      <h4>Erreur, impossible de supprimer :<a class="anchorjs-link" href="#oh-snap!-you-got-an-error!"><span class="anchorjs-icon"></span></a></h4>
+      <p><?php 
+      if ($_GET["erreur"] == "AUTEUR") {
+        echo "L'auteur est utilisé dans une oeuvre, vous ne pouvez supprimer un auteur en gardant ses oeuvres.";
+      } else if ($_GET["erreur"] == "OEUVRE") {
+        echo "L'oeuvre est utilisée dans exemplaire, vous ne pouvez supprimer une oeuvre en gardant ses exemplaires.";
+      } else if ($_GET["erreur"] == "EXEMPLAIRE") {
+        echo "L'exemplaire est utilisé dans emprunt, vous ne pouvez supprimer un exemplaire si il est actuellement emprunté.";
+      } else if ($_GET["erreur"] == "ADHERENT") { 
+        echo "L'adhérent est utilisé dans emprunt, vous ne pouvez supprimer un adhérent en gardant les emprunts liés effectués par cet adhérent.";
+      } else echo $_GET['erreur'];
+      ?>
+    </div>
+    <?php
+  }?>		
     <div class="container" id="tableau" style="margin-top:0px;">
       <div class="col-md-12">
         <form method="GET">
