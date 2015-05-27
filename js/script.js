@@ -106,7 +106,7 @@ function dropdown_emprunt(){
           document.getElementById("dropdown_emprunt").innerHTML = xmlhttp.responseText;
       }
   }
-  xmlhttp.open("GET","http://localhost:8080/bdd_projet/1/data/dropdown_add/drop_emprunt.php");
+  xmlhttp.open("GET","data/dropdown_add/drop_emprunt.php");
   xmlhttp.send();
 }
 
@@ -124,7 +124,7 @@ function dropdown_oeuvre(){
           document.getElementById("dropdown_oeuvre").innerHTML = xmlhttp.responseText;
       }
   }
-  xmlhttp.open("GET","http://localhost:8080/bdd_projet/1/data/dropdown_add/drop_oeuvre.php");
+  xmlhttp.open("GET","data/dropdown_add/drop_oeuvre.php");
   xmlhttp.send();
 }
 
@@ -143,7 +143,7 @@ function dropdown_exemplaire(){
           document.getElementById("dropdown_exemplaire").innerHTML = xmlhttp.responseText;
       }
   }
-  xmlhttp.open("GET","http://localhost:8080/bdd_projet/1/data/dropdown_add/drop_exemplaire.php");
+  xmlhttp.open("GET","data/dropdown_add/drop_exemplaire.php");
   xmlhttp.send();
 }
 
@@ -168,7 +168,7 @@ function showInfo(id) {
                 document.getElementById("nb_emprunt_info").innerHTML = xmlhttp.responseText;
             }
         }
-        xmlhttp.open("GET","http://localhost:8080/bdd_projet/1/data/getInfo.php?id="+id+"&table="+tab);
+        xmlhttp.open("GET","data/getInfo.php?id="+id+"&table="+tab);
         xmlhttp.send();
     }
 }
