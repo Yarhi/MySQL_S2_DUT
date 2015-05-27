@@ -170,7 +170,7 @@
 
       #add_nav{
         margin-left:0px;
-        margin-right: 25px;
+        margin-right: 5px;
       }
       #add_nav:hover{
         color: rgb(0, 153, 255);
@@ -208,12 +208,28 @@
               }
             ?>
           </ul>
+          <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+              <select name="search_col" class="btn">
+                <?php
+                  for ($i=1; $i < $req_table->ColumnCount() ; $i++) {
+                    $meta_col_name = $req_table->getColumnMeta($i); 
+                    echo "<option>".$meta_col_name['name']."</option>";
+                  }
+                ?>
+              </select>
+              <input type="hidden" name="table" value="<?=$table?>"/>
+              <input type="text" class="form-control" id="search" onClick="search_ajax()" name="search" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Rechercher</button>
+          </form>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#" onclick="navbar_fixed()"><span class="glyphicon glyphicon-bookmark"></span></a>
           </ul>
         </div>
       </div>
-    </nav>		
+    </nav>
+    <div id="test"></div>		
     <div class="container" id="tableau" style="margin-top:0px;">
       <div class="col-md-12">
         <form method="GET">

@@ -2,6 +2,7 @@ var tab = document.getElementById("table").innerHTML;
 var nb_col = document.getElementById("nb_col_"+tab).innerHTML;
 var add=0;
 var fixed=false;
+var search_select = null;
 
 
 function navbar_fixed(){
@@ -128,7 +129,6 @@ function dropdown_oeuvre(){
   xmlhttp.send();
 }
 
-
 function dropdown_exemplaire(){
   $("#modal_body_add").append("<div id='dropdown_exemplaire'></div>");
   if (window.XMLHttpRequest) {
@@ -171,4 +171,36 @@ function showInfo(id) {
         xmlhttp.open("GET","data/getInfo.php?id="+id+"&table="+tab);
         xmlhttp.send();
     }
+}
+
+function change_select(str){
+  this.search_select = str;
+  alert("mabite");
+}
+function search_ajax(){
+  var xhr = null;
+    
+  if(window.XMLHttpRequest || window.ActiveXObject){
+    if(window.ActiveXObject){
+      try{
+        xhr = new ActiveXObject("Msxml2.XMLHTTP");
+      }catch(e){
+        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+    }else{
+      xhr = new XMLHttpRequest(); 
+    }
+  }else{
+    alert("Votre navigateur ne supporte pas l'objet XMLHTTPRequest...");
+    return;
+  }
+
+  $(document).ready(function () {
+      var refreshId = setInterval(function () {
+        document.getElementById("test").innerHTML = this.search_select;
+      }, 1);
+      $.ajaxSetup({
+          cache: false
+      });
+  });
 }
