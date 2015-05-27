@@ -13,42 +13,30 @@
   }
 
   if ($table=="EMPRUNT") {
-    try {
-      $req_delete = "DELETE FROM EMPRUNT WHERE idEmprunt=".$_GET['id'];
-    
-    	echo $req_delete;
-    	$pdo -> exec($req_delete);
-    	header('Location: ../index.php?table='.$table);
-    	exit;
-    } catch (Exception $e) {
-      header('Location: ../index.php?table='.$table."&erreur=".$table);
-    }
+    $req_delete = "DELETE FROM EMPRUNT WHERE idEmprunt=".$_GET['id'];
+  
+  	echo $req_delete;
+  	$pdo -> exec($req_delete);
+  	header('Location: ../index.php?table='.$table);
+  	exit;
   }
 
   if ($table=="OEUVRE") {
-    try {
-      $req_delete = "DELETE FROM OEUVRE WHERE noOeuvre=".$_GET['id'];
+    $req_delete = "DELETE FROM OEUVRE WHERE noOeuvre=".$_GET['id'];
 
-    	echo $req_delete;
-    	$pdo -> exec($req_delete);
-    	header('Location: ../index.php?table='.$table);
-    	exit;
-    } catch (Exception $e) {
-      header('Location: ../index.php?table='.$table."&erreur=".$table);
-    }
+  	echo $req_delete;
+  	$pdo -> exec($req_delete);
+  	header('Location: ../index.php?table='.$table);
+  	exit;
   }
 
   if ($table=="AUTEUR") {
-    try {
-      $req_delete = "DELETE FROM AUTEUR WHERE idAuteur=".$_GET['id'];
+    $req_delete = "DELETE FROM AUTEUR WHERE idAuteur=".$_GET['id'];
 
-    	echo $req_delete;
-    	$pdo -> exec($req_delete);
-    	header('Location: ../index.php?table='.$table);
-    	exit;
-    } catch (Exception $e) {
-      header('Location: ../index.php?table='.$table."&erreur=".$table);
-    }
+  	echo $req_delete;
+  	$pdo -> exec($req_delete);
+  	header('Location: ../index.php?table='.$table);
+  	exit;
   }
 
   if ($table=="EXEMPLAIRE") {
