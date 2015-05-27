@@ -12,7 +12,7 @@
     }
   }
 */
-/* à appeller avant chaque utilisation de la base de donnée*/
+/* à appeller avant chaque utilisation de la base de donnée */
 /*
 ** http://php.net/manual/fr/function.htmlspecialchars.php
 ** http://www.bases-hacking.org/sql-injection.html
@@ -170,7 +170,7 @@
 
       #add_nav{
         margin-left:0px;
-        margin-right: 25px;
+        margin-right: 5px;
       }
       #add_nav:hover{
         color: rgb(0, 153, 255);
@@ -208,12 +208,50 @@
               }
             ?>
           </ul>
+          <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+              <select name="search_col" class="btn">
+                <?php
+                  for ($i=1; $i < $req_table->ColumnCount() ; $i++) {
+                    $meta_col_name = $req_table->getColumnMeta($i); 
+                    echo "<option>".$meta_col_name['name']."</option>";
+                  }
+                ?>
+              </select>
+              <input type="hidden" name="table" value="<?=$table?>"/>
+              <input type="text" class="form-control" id="search" onClick="search_ajax()" name="search" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Rechercher</button>
+          </form>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#" onclick="navbar_fixed()"><span class="glyphicon glyphicon-bookmark"></span></a>
           </ul>
         </div>
       </div>
-    </nav>		
+    </nav>
+<<<<<<< HEAD
+    <?php
+  if (isset($_GET["erreur"])) {?>
+    <div class="alert alert-danger alert-dismissible fade in" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+      <h4>Erreur, impossible de supprimer :<a class="anchorjs-link" href="#oh-snap!-you-got-an-error!"><span class="anchorjs-icon"></span></a></h4>
+      <p><?php 
+      if ($_GET["erreur"] == "AUTEUR") {
+        echo "L'auteur est utilisé dans une oeuvre, vous ne pouvez supprimer un auteur en gardant ses oeuvres.";
+      } else if ($_GET["erreur"] == "OEUVRE") {
+        echo "L'oeuvre est utilisée dans exemplaire, vous ne pouvez supprimer une oeuvre en gardant ses exemplaires.";
+      } else if ($_GET["erreur"] == "EXEMPLAIRE") {
+        echo "L'exemplaire est utilisé dans emprunt, vous ne pouvez supprimer un exemplaire si il est actuellement emprunté.";
+      } else if ($_GET["erreur"] == "ADHERENT") { 
+        echo "L'adhérent est utilisé dans emprunt, vous ne pouvez supprimer un adhérent en gardant les emprunts liés effectués par cet adhérent.";
+      } else echo $_GET['erreur'];
+      ?>
+    </div>
+    <?php
+  }?>		
+=======
+    <div id="test"></div>		
+>>>>>>> a9932d975f532c7f02d3e80b1f0ba1dd93316293
     <div class="container" id="tableau" style="margin-top:0px;">
       <div class="col-md-12">
         <form method="GET">
