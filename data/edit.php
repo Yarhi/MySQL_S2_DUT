@@ -4,7 +4,7 @@
   $table=$_GET['table'];
 
   if ($table=="ADHERENT") {
-  	$req_update = "UPDATE ADHERENT SET nomAdherent='".$_GET['li1']."',adresse='".$_GET['li2']."',datePaiement='".$_GET['li3']."' WHERE idAdherent=".$_GET['li0']."; ";
+  	$req_update = "UPDATE ADHERENT SET nomAdherent='".$_GET['li_add2']."',adresse='".$_GET['li_add3']."',datePaiement='".$_GET['li_add4']."' WHERE idAdherent=".$_GET['li_add1']."; ";
   	echo $req_update;
   	$pdo -> exec($req_update);
   	header('Location: ../index.php?table='.$table);
@@ -12,7 +12,7 @@
   }
 
   if ($table=="EMPRUNT") {
- 	$req_update = "UPDATE EMPRUNT SET idAdherent='".$_GET['li1']."',noExemplaire='".$_GET['li2']."',dateEmprunt='".$_GET['li3']."',dateRendu='".$_GET['li4']."' WHERE idEmprunt=".$_GET['li0']."; ";
+ 	$req_update = "UPDATE EMPRUNT SET idAdherent='".$_GET['li_edit2']."',noExemplaire='".$_GET['li_edit3']."',dateEmprunt='".$_GET['li_add4']."',dateRendu='".$_GET['li_add5']."' WHERE idEmprunt=".$_GET['li_add1']."; ";
   	echo $req_update;
   	$pdo -> exec($req_update);
   	header('Location: ../index.php?table='.$table);
@@ -20,7 +20,7 @@
   }
 
   if ($table=="OEUVRE") {
- 	$req_update = "UPDATE OEUVRE SET idAuteur='".$_GET['li1']."',titre='".$_GET['li2']."',dateParution='".$_GET['li3']."' WHERE noOeuvre=".$_GET['li0']."; ";
+ 	$req_update = "UPDATE OEUVRE SET idAuteur='".$_GET['li_edit2']."',titre='".$_GET['li_add3']."',dateParution='".$_GET['li_add4']."' WHERE noOeuvre=".$_GET['li_add1']."; ";
   	echo $req_update;
   	$pdo -> exec($req_update);
   	header('Location: ../index.php?table='.$table);
@@ -28,7 +28,7 @@
   }
 
   if ($table=="AUTEUR") {
- 	$req_update = "UPDATE AUTEUR SET nomAuteur='".$_GET['li1']."',prenomAuteur='".$_GET['li2']."' WHERE idAuteur=".$_GET['li0']."; ";
+ 	$req_update = "UPDATE AUTEUR SET nomAuteur='".$_GET['li_add2']."',prenomAuteur='".$_GET['li_add3']."' WHERE idAuteur=".$_GET['li_add1']."; ";
   	echo $req_update;
   	$pdo -> exec($req_update);
   	header('Location: ../index.php?table='.$table);
@@ -36,7 +36,7 @@
   }
 
   if ($table=="EXEMPLAIRE") {
- 	$req_update = "UPDATE EXEMPLAIRE SET etat='".$_GET['li1']."',dateAchat='".$_GET['li2']."',prix='".$_GET['li3']."',noOeuvre='".$_GET['li4']."' WHERE noExemplaire=".$_GET['li0']."; ";
+ 	$req_update = "UPDATE EXEMPLAIRE SET etat='".$_GET['li_add2']."',dateAchat='".$_GET['li_add3']."',prix='".$_GET['li_add4']."',noOeuvre='".$_GET['li_edit5']."' WHERE noExemplaire=".$_GET['li_add1']."; ";
   	echo $req_update;
   	$pdo -> exec($req_update);
   	header('Location: ../index.php?table='.$table);
