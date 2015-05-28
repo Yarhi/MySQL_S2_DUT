@@ -315,7 +315,19 @@
       ?>
     </div>
     <?php
-  }?>		
+      }
+      if (isset($_GET['error'])) {
+        if ($_GET['error']=="nb_emprunt") {
+    ?>
+      <div class="alert alert-danger alert-dismissible fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4>Erreur, impossible d'ajouter un emprunt :<a class="anchorjs-link" href="#oh-snap!-you-got-an-error!"><span class="anchorjs-icon"></span></a></h4>
+        <p>L'adherent possède plus de 5 emprunts en cours ..</p>
+      </div>
+    <?php
+        }
+      }
+    ?>		
     <div class="container" id="tableau" style="margin-top:0px;">
       <div class="col-md-12">
         <form method="GET">
