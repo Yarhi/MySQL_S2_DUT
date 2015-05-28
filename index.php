@@ -202,9 +202,9 @@
         font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
         position: absolute;
         background-color:white;
-        border-left:solid 1px #66afe9;
-        border-right:solid 1px #66afe9;
-        border-bottom:solid 1px #66afe9;
+        border-left:solid 1.7px #66afe9;
+        border-right:solid 1.7px #66afe9;
+        border-bottom:solid 1.7px #66afe9;
         border-radius: 0px 0px 15px 15px;
         color:black;
       }
@@ -388,7 +388,7 @@
               $j=0;
               foreach ($rep_table as $data) {
                 $j++;
-                echo "<tr>";
+                echo "<tr id='tr".$j."'>";
                 for ($i=0; $i < $req_table->columnCount() ; $i++) { 
                   $name_col = $req_table->getColumnMeta($i);
                   //if($i!=0){

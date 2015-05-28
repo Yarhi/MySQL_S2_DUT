@@ -225,3 +225,17 @@ $('#search_result').mouseover(function(){
 $('#search_result').mouseout(function(){
   $('#search_result').css('display','none');
 });
+
+function show_pointer(val){
+  var search_id_ptn = document.getElementById("sear"+val+"0").innerHTML;
+  var nb_li_ptn = document.getElementById("nb_li_"+tab).innerHTML;
+  var i=0;
+  var table_id_cor=0;
+  while(table_id_cor!=search_id_ptn){
+    i++;
+    var table_id_cor = document.getElementById('li'+i+"0").innerHTML;
+  };
+  $('html,body').animate({scrollTop: $("#li"+i+"0").offset().top},'slow');
+  $('#tr'+i).css('text-decoration','underline');
+  $('#tr'+i).css('font-weight','bold');
+}

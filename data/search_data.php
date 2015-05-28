@@ -31,16 +31,23 @@
 						echo "<th>".$meta['name']."</th>";
 					}
 				?>
+			<th>Opérations</th>
 			</tr>
 		</thead>
 		<?php
+			$j=0;
 			foreach ($rep_search as $key) {
+				$j++;
 				echo "<tr>";
 				for ($i=0; $i < $req_search->ColumnCount() ; $i++) {
 					$meta = $req_search->getColumnMeta($i);
-					echo "<td>".$key[$meta['name']]."</td>";
+					$meta_id = $req_search->getColumnMeta(0);
+					echo "<td style='background-color:transparent' id='sear".$j.$i."'>".$key[$meta['name']]."</td>";
 				}
-				echo "</tr>";
+                echo "<td><span id='btn_tab' onclick='edit($j)' data-toggle='modal' data-target='#modalEdit' class='glyphicon glyphicon-pencil'></span>";
+                echo "<span id='btn_tab' onclick='deleter($j)' data-toggle='modal' data-target='#modalDelete' class='glyphicon glyphicon-remove'></span>";
+                echo "<span class='glyphicon glyphicon glyphicon-eye-open' id='btn_tab' onclick='show_pointer(".$j.")'></span></td>";
+                echo "</tr>";
 			}
 		?>
 	</table>
