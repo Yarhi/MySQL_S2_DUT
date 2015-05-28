@@ -256,7 +256,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Bibliothèque</a>
+          <a class="navbar-brand" href="?table=<?=$table?>">Bibliothèque</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -292,6 +292,7 @@
             <button type="submit" class="btn btn-default">Rechercher</button>
           </form>
           <ul class="nav navbar-nav navbar-right">
+            <li><a href="#" onclick="danger()"><span class="glyphicon glyphicon-warning-sign"></span></a>
             <li><a href="#" onclick="navbar_fixed()"><span class="glyphicon glyphicon-bookmark"></span></a>
           </ul>
         </div>

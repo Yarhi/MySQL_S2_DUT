@@ -26,10 +26,6 @@ function navbar_fixed(){
   }
 }
 
-
-
-
-
 /******/
 /*EDIT*/
 /******/
@@ -69,24 +65,6 @@ function editer(id){
 /******/
 /*EDIT*/
 /******/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -379,4 +357,29 @@ function show_pointer(val){
   $('html,body').animate({scrollTop: $("#li"+i+"0").offset().top},'slow');
   $('#tr'+i).css('text-decoration','underline');
   $('#tr'+i).css('font-weight','bold');
+}
+
+function editer_search(id){
+  var nb_li_ptn = document.getElementById("nb_li_"+tab).innerHTML;
+  var i=0;
+  var table_id_cor=0;
+  while(table_id_cor!=id){
+    i++;
+    var table_id_cor = document.getElementById('li'+i+"0").innerHTML;
+  };
+  editer(i);
+}
+function deleter_search(id){
+  var nb_li_ptn = document.getElementById("nb_li_"+tab).innerHTML;
+  var i=0;
+  var table_id_cor=0;
+  while(table_id_cor!=id){
+    i++;
+    var table_id_cor = document.getElementById('li'+i+"0").innerHTML;
+  };
+  deleter(i);
+}
+
+function danger(){
+
 }

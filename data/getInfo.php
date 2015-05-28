@@ -23,7 +23,7 @@
         	$rep_info = $req_info->fetchAll();
     
         	foreach ($rep_info as $key) {
-        		if ($key['dateRendu'] == "") $rendu = " <span style='color:red'>Non rendu</span>";
+        		if ($key['dateRendu'] == "" || $key['dateRendu']=="0000-00-00") $rendu = " <span style='color:red'>Non rendu</span>";
         		else $rendu = "	Rendu le : <b>".$key['dateRendu']."</b>"; 
         		echo "-<b>".$key['titre']."</b> Emprunté le : <b>".$key['dateEmprunt']."</b> ,".$rendu.".<br/>";
         	}

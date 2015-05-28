@@ -44,8 +44,8 @@
 					$meta_id = $req_search->getColumnMeta(0);
 					echo "<td style='background-color:transparent' id='sear".$j.$i."'>".$key[$meta['name']]."</td>";
 				}
-                echo "<td><span id='btn_tab' onclick='edit($j)' data-toggle='modal' data-target='#modalEdit' class='glyphicon glyphicon-pencil'></span>";
-                echo "<span id='btn_tab' onclick='deleter($j)' data-toggle='modal' data-target='#modalDelete' class='glyphicon glyphicon-remove'></span>";
+                echo "<td><span id='btn_tab' onclick='editer_search(".$key[$meta_id['name']].")' data-toggle='modal' data-target='#modalEdit' class='glyphicon glyphicon-pencil'></span>";
+                echo "<span id='btn_tab' onclick='deleter_search(".$key[$meta_id['name']].")' data-toggle='modal' data-target='#modalDelete' class='glyphicon glyphicon-remove'></span>";
                 echo "<span class='glyphicon glyphicon glyphicon-eye-open' id='btn_tab' onclick='show_pointer(".$j.")'></span></td>";
                 echo "</tr>";
 			}
