@@ -1,8 +1,10 @@
-var tab = document.getElementById("table").innerHTML;
+var tab = document.getElementById("table_name").innerHTML;
 var nb_col = document.getElementById("nb_col_"+tab).innerHTML;
 var add=0;
 var fixed=false;
 var search_select = null;
+
+
 if (window.XMLHttpRequest) {
     // code for IE7+, Firefox, Chrome, Opera, Safari
     xmlhttp = new XMLHttpRequest();

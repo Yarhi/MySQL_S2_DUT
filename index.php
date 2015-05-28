@@ -147,11 +147,23 @@
 				background-attachment: fixed;*
 			}
 
-      .table{
+      #table{
         color:black;
         border: 2px black;
         height:500px;
         overflow: scroll;        
+      }
+
+      #table-search{
+        color:black;
+        height:auto;
+        overflow: scroll;        
+      }
+      #border_table_search{
+        border-bottom:solid 2px black;
+      }
+      #result_title{
+        color:black;
       }
 
       #order{
@@ -292,7 +304,6 @@
           <input type="hidden" name="table" value="<?=$table?>"/>
           <input style="font-size:15px;background-image:none;color:black;border:none;background-color:transparent;" type="submit" value="Rafraichir"></input>
           <?php
-
             for ($i=0; $i <$req_table_check->columnCount() ; $i++) { 
               $name_col = $req_table_check->getColumnMeta($i);
 
@@ -315,12 +326,16 @@
             }
           ?>
           </div>
-        </form>
-        <table class="table table-hover">
+        </form> 
+        <?php
+          if (isset($_GET['colonne']) && $_GET['search'] ) {
+            include('data/search_data.php');
+          }
+        ?>
+        <table id="table" class="table table-hover">
           <thead>
             <tr>
               <?php
-
                 for ($i=0; $i <$req_table->columnCount() ; $i++) { 
                   $name_col = $req_table->getColumnMeta($i);
                   //$col_type = $name_col['native_type'];
@@ -393,7 +408,7 @@
       </div>
     </div>
 
-    <div id="table" style="display:none"><?=$table?></div>
+    <div id="table_name" style="display:none"><?=$table?></div>
     <div style="display:none" id="nb_col">
       <div id="nb_col_ADHERENT"><?=$nb_col_adherent?></div>
       <div id="nb_col_EMPRUNT"><?=$nb_col_emprunt?></div>
