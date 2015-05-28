@@ -181,6 +181,33 @@
         width:100%;
         border:solid 1px grey;
       }
+
+      #search_result{
+        z-index: 1;
+        width:auto;
+        display:none;
+        padding: 15px;
+        font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        position: absolute;
+        background-color:white;
+        border-left:solid 1px #66afe9;
+        border-right:solid 1px #66afe9;
+        border-bottom:solid 1px #66afe9;
+        border-radius: 0px 0px 15px 15px;
+        color:black;
+      }
+      #search_result:hover{
+        display: none;
+      }
+
+      #autocomplement{
+        text-decoration: none;
+        color:black;
+      }
+      #autocomplement:hover{
+        cursor: pointer;
+        color:blue;
+      }
 		</style>
 	</head>
 	<body>
@@ -207,19 +234,27 @@
                 echo '<li><a href="#" onclick="add_val(\''.$table_array[$i].'\')" data-toggle="modal" data-target="#ModalAdd" id="add_nav"><span class="glyphicon glyphicon-plus"></span></a></li>';
               }
             ?>
-          </ul>
-          <form class="navbar-form navbar-left" role="search">
-            <div class="form-group">
-              <select name="search_col" class="btn">
+            <li role="presentation" class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+              <span id="dropdown_value">Donnée</span> <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
                 <?php
                   for ($i=1; $i < $req_table->ColumnCount() ; $i++) {
                     $meta_col_name = $req_table->getColumnMeta($i); 
-                    echo "<option>".$meta_col_name['name']."</option>";
+                    echo "<li id='option".$i."'><a onclick='change_select(\"".$meta_col_name['name']."\")' href='#'>".$meta_col_name['name']."</a></li>";
                   }
                 ?>
-              </select>
+            </ul>
+            </li>
+          </ul>
+          
+          <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
               <input type="hidden" name="table" value="<?=$table?>"/>
-              <input type="text" class="form-control" id="search" onClick="search_ajax()" name="search" placeholder="Search">
+              <input type="hidden" name="colonne" value="" id='col_hidden_send'/>
+              <input type="text" autocomplete="off" class="form-control" id="search" onClick="search_ajax()" name="search" placeholder="Search">
+              <div id="search_result"></div>
             </div>
             <button type="submit" class="btn btn-default">Rechercher</button>
           </form>
@@ -229,7 +264,6 @@
         </div>
       </div>
     </nav>
-<<<<<<< HEAD
     <?php
   if (isset($_GET["erreur"])) {?>
     <div class="alert alert-danger alert-dismissible fade in" role="alert">
@@ -249,9 +283,7 @@
     </div>
     <?php
   }?>		
-=======
     <div id="test"></div>		
->>>>>>> a9932d975f532c7f02d3e80b1f0ba1dd93316293
     <div class="container" id="tableau" style="margin-top:0px;">
       <div class="col-md-12">
         <form method="GET">

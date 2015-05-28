@@ -3,7 +3,13 @@ var nb_col = document.getElementById("nb_col_"+tab).innerHTML;
 var add=0;
 var fixed=false;
 var search_select = null;
-
+if (window.XMLHttpRequest) {
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp = new XMLHttpRequest();
+} else {
+    // code for IE6, IE5
+    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+}
 
 function navbar_fixed(){
   if (this.fixed==false) {
@@ -173,34 +179,47 @@ function showInfo(id) {
     }
 }
 
+function search_ajax(){
+        $(document).ready(function () {
+            var refreshId = setInterval(function () {
+              var search_value = document.getElementById("search").value;
+              xmlhttp.onreadystatechange = function() {
+                  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                      document.getElementById("search_result").innerHTML = xmlhttp.responseText;
+                  }
+              }
+              xmlhttp.open("GET","data/search.php?table="+tab+"&search="+search_value+"&data="+search_select);
+              xmlhttp.send();
+            }, 500);
+            $.ajaxSetup({
+                cache: false
+            });
+        });    
+}
+
 function change_select(str){
   this.search_select = str;
-  alert("mabite");
+  $('#dropdown_value').html(this.search_select);
+  document.getElementById("col_hidden_send").value= (this.search_select);
 }
-function search_ajax(){
-  var xhr = null;
-    
-  if(window.XMLHttpRequest || window.ActiveXObject){
-    if(window.ActiveXObject){
-      try{
-        xhr = new ActiveXObject("Msxml2.XMLHTTP");
-      }catch(e){
-        xhr = new ActiveXObject("Microsoft.XMLHTTP");
-      }
-    }else{
-      xhr = new XMLHttpRequest(); 
-    }
-  }else{
-    alert("Votre navigateur ne supporte pas l'objet XMLHTTPRequest...");
-    return;
-  }
+function change_value_search(str){
+  document.getElementById("search").value=str;
+  $('#search_result').css('display','none');
+}
 
-  $(document).ready(function () {
-      var refreshId = setInterval(function () {
-        document.getElementById("test").innerHTML = this.search_select;
-      }, 1);
-      $.ajaxSetup({
-          cache: false
-      });
-  });
-}
+$('#search').mouseover(function(){
+  if($('#search_result').html()!=""){
+    $('#search_result').css('display','block');
+  }
+});
+$('#search').mouseout(function(){
+  $('#search_result').css('display','none');
+});
+$('#search_result').mouseover(function(){
+  if($('#search_result').html()!=""){
+    $('#search_result').css('display','block');
+  }
+});
+$('#search_result').mouseout(function(){
+  $('#search_result').css('display','none');
+});
