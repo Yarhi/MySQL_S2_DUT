@@ -189,7 +189,28 @@
         cursor: pointer;        
       }
 
-      #dropdown{
+
+      #dropdown_add_nomAdherent{
+        width:100%;
+        border:solid 1px grey;
+      }
+      #dropdown_edit_nomAdherent{
+        width:100%;
+        border:solid 1px grey;
+      }
+      #dropdown_add_titre{
+        width:100%;
+        border:solid 1px grey;
+      }
+      #dropdown_edit_titre{
+        width:100%;
+        border:solid 1px grey;
+      }
+      #dropdown_add_nomAuteur{
+        width:100%;
+        border:solid 1px grey;
+      }
+      #dropdown_edit_nomAuteur{
         width:100%;
         border:solid 1px grey;
       }
@@ -295,7 +316,6 @@
     </div>
     <?php
   }?>		
-    <div id="test"></div>		
     <div class="container" id="tableau" style="margin-top:0px;">
       <div class="col-md-12">
         <form method="GET">
@@ -398,7 +418,7 @@
                   //}
                 }
                 //buttons edit et delete
-                echo "<td><span id='btn_tab' onclick='edit($j)' data-toggle='modal' data-target='#modalEdit' class='glyphicon glyphicon-pencil'></span>";
+                echo "<td><span id='btn_tab' onclick='editer($j)' data-toggle='modal' data-target='#modalEdit' class='glyphicon glyphicon-pencil'></span>";
                 echo "<span id='btn_tab' onclick='deleter($j)' data-toggle='modal' data-target='#modalDelete' class='glyphicon glyphicon-remove'></span>";
                 echo "<span data-toggle='modal' data-target='#modalInfo' class='glyphicon glyphicon-info-sign' id='btn_tab' onclick='information($j)'></span></td>";
                 echo "</tr>";
@@ -471,41 +491,6 @@
       </div>
     </div>
 
-
-    <!--MODAL EDIT-->
-    <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <form method="get" action="data/edit.php">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="ModalLabel_title">Edition ligne</h4>
-              <div id="nb_col" style="display:none;"><?=$req_table->columnCount()?></div>
-            </div>
-            <div class="modal-body">
-              <input type="hidden" value="<?=$table?>" name="table" />
-              <?php
-                for ($i=0; $i < $req_table->columnCount() ; $i++) { 
-                  $name_col = $req_table->getColumnMeta($i);
-              ?>
-                <div class="form-group">
-                  <label for="recipient-name" class="control-label"><?=$name_col['name']?></label>
-                  <input type="text" <?php if($i==0) echo "readonly='true'";?> name="li<?=$i?>" class="form-control" id="recipient-name<?=$i?>">
-                </div>
-              <?php
-                }
-              ?>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-              <button type="submit" class="btn btn-primary">Editer</button>
-            </div>
-          </div>
-        </div>
-      </form>
-    </div>
-
-
     <!--MODAL DELETE-->
     <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <form method="get" action="data/delete.php">
@@ -532,6 +517,7 @@
     <?php
       include('data/modal_add.php');
       include('data/modal_info.php');
+      include('data/modal_edit.php')
     ?>
     <script type="text/javascript" src="js/script.js"></script>
 		<script type="text/javascript">

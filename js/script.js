@@ -3,7 +3,7 @@ var nb_col = document.getElementById("nb_col_"+tab).innerHTML;
 var add=0;
 var fixed=false;
 var search_select = null;
-
+var edit=0;
 
 if (window.XMLHttpRequest) {
     // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -27,14 +27,69 @@ function navbar_fixed(){
 }
 
 
-function edit(id){
-  document.getElementById("ModalLabel_title").innerHTML = "Edition ligne "+id;
-  for (var i = 0; i < nb_col; i++) {
-    var cible = document.getElementById("recipient-name"+i);
-    var value_input = document.getElementById("li"+id+i); 
-    cible.value = value_input.innerHTML;
-  };
+
+
+
+/******/
+/*EDIT*/
+/******/
+
+function editer(id){
+  edit_val();
+  id_val = document.getElementById("li"+id+"0").innerHTML;
+  document.getElementById("ModalLabel_title").innerHTML = "Edition ligne d'id "+id_val;
+  if (tab=="ADHERENT") {
+    for (var i=1; i<5; i++) {
+      document.getElementById('li_edit'+i).value=document.getElementById('li'+id+(i-1)).innerHTML;
+    };
+  }
+  else if(tab=="EMPRUNT"){
+    document.getElementById('li_edit1').value=document.getElementById('li'+id+'0').innerHTML;
+    document.getElementById('li_edit4').value=document.getElementById('li'+id+'3').innerHTML;
+    document.getElementById('li_edit5').value=document.getElementById('li'+id+'4').innerHTML;
+  }
+  else if(tab=="OEUVRE"){
+    document.getElementById('li_edit1').value=document.getElementById('li'+id+'0').innerHTML;
+    document.getElementById('li_edit3').value=document.getElementById('li'+id+'3').innerHTML;
+    document.getElementById('li_edit4').value=document.getElementById('li'+id+'4').innerHTML;
+  }
+  else if(tab=="AUTEUR"){
+    document.getElementById('li_edit1').value=document.getElementById('li'+id+'0').innerHTML;
+    document.getElementById('li_edit2').value=document.getElementById('li'+id+'1').innerHTML;
+    document.getElementById('li_edit3').value=document.getElementById('li'+id+'2').innerHTML;
+  }
+  else if(tab=="EXEMPLAIRE"){
+    document.getElementById('li_edit1').value=document.getElementById('li'+id+'0').innerHTML;
+    document.getElementById('li_edit2').value=document.getElementById('li'+id+'1').innerHTML;
+    document.getElementById('li_edit3').value=document.getElementById('li'+id+'2').innerHTML;  
+    document.getElementById('li_edit4').value=document.getElementById('li'+id+'3').innerHTML;  
+  }
 };
+
+/******/
+/*EDIT*/
+/******/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function deleter(id){
   document.getElementById("delete_id").value=document.getElementById("li"+id+"0").innerHTML;
@@ -68,7 +123,7 @@ function add_val(table){
     else{
       if (table=="EMPRUNT") {
         if(i==2 || i==3){
-          dropdown_emprunt();
+          dropdown_emprunt('add');
           i=3;
         }
         else{
@@ -77,7 +132,7 @@ function add_val(table){
       }
       else if(table=="OEUVRE"){
         if(i==2){ 
-          dropdown_oeuvre();
+          dropdown_oeuvre('add');
           i=2;
         } 
         else{
@@ -86,7 +141,7 @@ function add_val(table){
       }
       else if(table=="EXEMPLAIRE"){
         if(i==5){ 
-          dropdown_exemplaire();
+          dropdown_exemplaire('add');
           i=5;
         } 
         else{
@@ -101,8 +156,94 @@ function add_val(table){
   this.add=1;
 }
 
-function dropdown_emprunt(){
-  $("#modal_body_add").append("<div id='dropdown_emprunt'></div>");
+
+
+function edit_val(){
+  if (edit!=1) {
+    var col = [];
+    var nb_col = document.getElementById("nb_col_"+tab).innerHTML;
+
+    for(var i = 0;i <= nb_col;i++){
+      col.push(document.getElementById("col"+tab+""+i).innerHTML);
+    }
+
+    for (var i=1; i<col.length; i++) {
+      $("#modal_body_edit").append('<label for="recipient-name" class="control-label">'+col[i]+'</label>');
+      if (tab=="ADHERENT") {
+        if(i==1){
+          $("#modal_body_edit").append("<input type='text' id='li_edit"+i+"' name='li_add"+i+"' readonly='true' class='form-control' />");
+        }else{
+          $("#modal_body_edit").append("<input type='text' id='li_edit"+i+"' name='li_add"+i+"' class='form-control' />");
+        }
+      }
+      else if(tab=="EMPRUNT"){
+        if(i==1){
+          $("#modal_body_edit").append("<input type='text' id='li_edit"+i+"' name='li_add"+i+"' readonly='true' class='form-control' />");
+        }
+        else if(i==2){
+          dropdown_emprunt('edit');
+          i=3;
+        }
+        else{
+          $("#modal_body_edit").append("<input type='text' id='li_edit"+i+"' name='li_add"+i+"' class='form-control' />");
+        }        
+      }
+      else if(tab=="OEUVRE"){
+        if(i==1){
+          $("#modal_body_edit").append("<input type='text' id='li_edit"+i+"' name='li_add"+i+"' readonly='true' class='form-control' />");
+        }
+        else if(i==2){
+          dropdown_oeuvre('edit');
+          i=2;
+        }
+        else{
+          $("#modal_body_edit").append("<input type='text' id='li_edit"+i+"' name='li_add"+i+"' class='form-control' />");
+        }     
+      }
+      else if (tab=="AUTEUR") {
+        if(i==1){
+          $("#modal_body_edit").append("<input type='text' id='li_edit"+i+"' name='li_add"+i+"' readonly='true' class='form-control' />");
+        }else{
+          $("#modal_body_edit").append("<input type='text' id='li_edit"+i+"' name='li_add"+i+"' class='form-control' />");
+        }
+      }
+      else if(tab=="EXEMPLAIRE"){
+        if(i==1){
+          $("#modal_body_edit").append("<input type='text' id='li_edit"+i+"' name='li_add"+i+"' readonly='true' class='form-control' />");
+        }
+        else if(i==5){
+          dropdown_exemplaire('edit');
+          i=5;
+        }
+        else{
+          $("#modal_body_edit").append("<input type='text' id='li_edit"+i+"' name='li_add"+i+"' class='form-control' />");
+        }     
+      }
+    };
+  };
+  this.edit=1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function dropdown_emprunt(val){
+  $("#modal_body_"+val).append("<div id='dropdown_emprunt'></div>");
   if (window.XMLHttpRequest) {
       // code for IE7+, Firefox, Chrome, Opera, Safari
       xmlhttp = new XMLHttpRequest();
@@ -115,12 +256,12 @@ function dropdown_emprunt(){
           document.getElementById("dropdown_emprunt").innerHTML = xmlhttp.responseText;
       }
   }
-  xmlhttp.open("GET","data/dropdown_add/drop_emprunt.php");
+  xmlhttp.open("GET","data/dropdown_add/drop_emprunt.php?val="+val);
   xmlhttp.send();
 }
 
-function dropdown_oeuvre(){
-  $("#modal_body_add").append("<div id='dropdown_oeuvre'></div>");
+function dropdown_oeuvre(val){
+  $("#modal_body_"+val).append("<div id='dropdown_oeuvre'></div>");
   if (window.XMLHttpRequest) {
       // code for IE7+, Firefox, Chrome, Opera, Safari
       xmlhttp = new XMLHttpRequest();
@@ -133,12 +274,12 @@ function dropdown_oeuvre(){
           document.getElementById("dropdown_oeuvre").innerHTML = xmlhttp.responseText;
       }
   }
-  xmlhttp.open("GET","data/dropdown_add/drop_oeuvre.php");
+  xmlhttp.open("GET","data/dropdown_add/drop_oeuvre.php?val="+val);
   xmlhttp.send();
 }
 
-function dropdown_exemplaire(){
-  $("#modal_body_add").append("<div id='dropdown_exemplaire'></div>");
+function dropdown_exemplaire(val){
+  $("#modal_body_"+val).append("<div id='dropdown_exemplaire'></div>");
   if (window.XMLHttpRequest) {
       // code for IE7+, Firefox, Chrome, Opera, Safari
       xmlhttp = new XMLHttpRequest();
@@ -151,7 +292,7 @@ function dropdown_exemplaire(){
           document.getElementById("dropdown_exemplaire").innerHTML = xmlhttp.responseText;
       }
   }
-  xmlhttp.open("GET","data/dropdown_add/drop_exemplaire.php");
+  xmlhttp.open("GET","data/dropdown_add/drop_exemplaire.php?val="+val);
   xmlhttp.send();
 }
 
@@ -182,21 +323,21 @@ function showInfo(id) {
 }
 
 function search_ajax(){
-        $(document).ready(function () {
-            var refreshId = setInterval(function () {
-              var search_value = document.getElementById("search").value;
-              xmlhttp.onreadystatechange = function() {
-                  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                      document.getElementById("search_result").innerHTML = xmlhttp.responseText;
-                  }
-              }
-              xmlhttp.open("GET","data/search.php?table="+tab+"&search="+search_value+"&data="+search_select);
-              xmlhttp.send();
-            }, 500);
-            $.ajaxSetup({
-                cache: false
-            });
-        });    
+  $(document).ready(function () {
+      var refreshId = setInterval(function () {
+        var search_value = document.getElementById("search").value;
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("search_result").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","data/search.php?table="+tab+"&search="+search_value+"&data="+search_select);
+        xmlhttp.send();
+      }, 500);
+      $.ajaxSetup({
+          cache: false
+      });
+  });    
 }
 
 function change_select(str){
