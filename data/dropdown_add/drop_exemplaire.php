@@ -1,5 +1,5 @@
 <?php
-	include('../connexion_bdd.php');
+	include('../data/connexion_bdd.php');
 	$req_str = "SELECT titre,noOeuvre FROM OEUVRE";
 	$req = $pdo->query($req_str);
 	$req->fetch();

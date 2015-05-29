@@ -19,7 +19,7 @@
 ** http://fr.wikipedia.org/wiki/Injection_SQL
 */
 
-	include('data/connexion_bdd.php');
+	include('data/data/connexion_bdd.php');
 	
 	$table_array = array("ADHERENT","EMPRUNT","OEUVRE","AUTEUR","EXEMPLAIRE");
   if (!isset($_GET['table'])) {
@@ -129,7 +129,7 @@
   }
 
   //récupère les données des tables
-  include("data/tables.php");
+  include("data/data/tables.php");
 
 
 ?>
@@ -362,7 +362,7 @@
         </form> 
         <?php
           if (isset($_GET['colonne']) && $_GET['search'] ) {
-            include('data/search_data.php');
+            include('data/data/search_data.php');
           }
         ?>
         <table id="table" class="table table-hover">
@@ -503,34 +503,11 @@
         ?>
       </div>
     </div>
-
-    <!--MODAL DELETE-->
-    <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <form method="get" action="data/delete.php">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="ModalLabel_title_del">Suppression ligne </h4>
-              <div id="nb_col" style="display:none;"><?=$req_table->columnCount()?></div>
-            </div>
-            <div class="modal-body">
-              Etes vous sûr de vouloir supprimer la ligne ?
-              <input type="hidden" value="<?=$table?>" name="table" />
-              <input type="hidden" value="" id="delete_id" name="id" />
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Non</button>
-              <button type="submit" class="btn btn-primary">Oui</button>
-            </div>
-          </div>
-        </div>
-      </form>
-    </div>
     <?php
-      include('data/modal_add.php');
-      include('data/modal_info.php');
-      include('data/modal_edit.php')
+      include('data/modal/modal_add.php');
+      include('data/modal/modal_info.php');
+      include('data/modal/modal_edit.php');
+      include('data/modal/modal_delete.php');
     ?>
     <script type="text/javascript" src="js/script.js"></script>
 		<script type="text/javascript">

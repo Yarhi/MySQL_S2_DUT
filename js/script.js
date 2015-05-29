@@ -295,7 +295,7 @@ function showInfo(id) {
                 document.getElementById("nb_emprunt_info").innerHTML = xmlhttp.responseText;
             }
         }
-        xmlhttp.open("GET","data/getInfo.php?id="+id+"&table="+tab);
+        xmlhttp.open("GET","data/data/getInfo.php?id="+id+"&table="+tab);
         xmlhttp.send();
     }
 }
@@ -309,7 +309,7 @@ function search_ajax(){
                 document.getElementById("search_result").innerHTML = xmlhttp.responseText;
             }
         }
-        xmlhttp.open("GET","data/search.php?table="+tab+"&search="+search_value+"&data="+search_select);
+        xmlhttp.open("GET","data/data/search.php?table="+tab+"&search="+search_value+"&data="+search_select);
         xmlhttp.send();
       }, 500);
       $.ajaxSetup({
