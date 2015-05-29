@@ -292,7 +292,7 @@
             <button type="submit" class="btn btn-default">Rechercher</button>
           </form>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#" onclick="danger()"><span class="glyphicon glyphicon-warning-sign"></span></a>
+            <li><a href="#" onclick="danger()" data-toggle="modal" data-target="#ModalDanger"><span class="glyphicon glyphicon-warning-sign"></span></a>
             <li><a href="#" onclick="navbar_fixed()"><span class="glyphicon glyphicon-bookmark"></span></a>
           </ul>
         </div>
@@ -508,6 +508,7 @@
       include('data/modal/modal_info.php');
       include('data/modal/modal_edit.php');
       include('data/modal/modal_delete.php');
+      include('data/modal/modal_danger.php');
     ?>
     <script type="text/javascript" src="js/script.js"></script>
 		<script type="text/javascript">

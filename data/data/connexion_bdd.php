@@ -12,6 +12,7 @@
 	} catch (PDOException $e) {
 		echo 'Connexion échouée : ' . $e->getMessage();
 	}
+	$pdo->exec("SET NAMES UTF8;");
 	
 /*
 INSERT INTO EMPRUNT 
