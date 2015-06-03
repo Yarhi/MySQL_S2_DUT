@@ -241,6 +241,36 @@
         cursor: pointer;
         color:blue;
       }
+
+
+      .navbar-right-info{
+        z-index: 3;
+        position:fixed;
+        right: 0%;
+        margin-top: -20px;
+        margin-bottom: 0%;
+        height: 100%;
+        background-color:#f8f8f8;
+        border-left:solid 5px #e7e7e7;
+        font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        padding: 5px;
+      }
+
+      #span-left{
+        margin-right: 5px;
+      }
+      #navbar-info{
+        display: block;
+      }
+
+      #info-left{
+        text-decoration: none;
+        color:black;
+      }
+      #info-left:hover{
+        color:#158cba;
+        cursor: pointer;
+      }
 		</style>
 	</head>
 	<body>
@@ -281,7 +311,6 @@
             </ul>
             </li>
           </ul>
-          
           <form class="navbar-form navbar-left" role="search">
             <div class="form-group">
               <input type="hidden" name="table" value="<?=$table?>"/>
@@ -292,12 +321,20 @@
             <button type="submit" class="btn btn-default">Rechercher</button>
           </form>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#" onclick="danger()" data-toggle="modal" data-target="#ModalDanger"><span class="glyphicon glyphicon-warning-sign"></span></a>
-            <li><a href="#" onclick="navbar_fixed()"><span class="glyphicon glyphicon-bookmark"></span></a>
+            <li><a href="#" onclick="ul_info()"><span class="glyphicon glyphicon-list"></span></a>
           </ul>
         </div>
       </div>
     </nav>
+
+
+
+    <ul class="navbar-right-info" id='navbar-info'>
+      <div class='col-md-12 container-nav-right'>
+        <h4><a id='info-left' href='#' onclick="stats()"  data-toggle="modal" data-target="#ModalStats"><span id='span-left' class='glyphicon glyphicon-stats'></span> Statistiques </a></h4>
+        <h4><a id='info-left' href="#" onclick="danger()" data-toggle="modal" data-target="#ModalDanger"><span id='span-left' class="glyphicon glyphicon-tags"></span> Informations </a></h4>
+      </div>
+    </ul>
     <?php
   if (isset($_GET["erreur"])) {?>
     <div class="alert alert-danger alert-dismissible fade in" role="alert">
@@ -509,6 +546,7 @@
       include('data/modal/modal_edit.php');
       include('data/modal/modal_delete.php');
       include('data/modal/modal_danger.php');
+      include('data/modal/modal_stats.php');
     ?>
     <script type="text/javascript" src="js/script.js"></script>
 		<script type="text/javascript">

@@ -1,9 +1,11 @@
 var tab = document.getElementById("table_name").innerHTML;
 var nb_col = document.getElementById("nb_col_"+tab).innerHTML;
 var add=0;
-var fixed=false;
+var fixed=true;
 var search_select = null;
 var edit=0;
+
+ul_info();
 
 if (window.XMLHttpRequest) {
     // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -390,9 +392,39 @@ function danger(){
   }
   xmlhttp.onreadystatechange = function() {
       if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-          document.getElementById("nb_emprunt_info").innerHTML = xmlhttp.responseText;
+          document.getElementById("emprunt_danger").innerHTML = xmlhttp.responseText;
       }
   }
-  xmlhttp.open("GET","data/data/getInfo.php?id="+id+"&table="+tab);
+  xmlhttp.open("GET","data/op/danger.php");
+  xmlhttp.send();
+} 
+
+
+
+function ul_info(){
+  navbar_fixed();
+  var ul_info_var = document.getElementById('navbar-info');
+  if (ul_info_var.style.display=="none") {
+    ul_info_var.style.display="block";
+  }else{
+    ul_info_var.style.display="none";
+  }
+} 
+
+
+function stats(){
+  if (window.XMLHttpRequest) {
+      // code for IE7+, Firefox, Chrome, Opera, Safari
+      xmlhttp = new XMLHttpRequest();
+  } else {
+      // code for IE6, IE5
+      xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+          document.getElementById("stats_data").innerHTML = xmlhttp.responseText;
+      }
+  }
+  xmlhttp.open("GET","data/op/stats.php");
   xmlhttp.send();
 } 
